@@ -9,6 +9,7 @@
     <ul>
         <li><a href="drawer.php?num=0">Первое задание (Drawer)</a></li>
         <li><a href="sort.php">Второе задание (Sort)</a></li>
+        <li><a href="unix.php">Третье задание (Unix)</a></li>
     </ul>
 </body>
 </html>
