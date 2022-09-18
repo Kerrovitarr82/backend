@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+
+  database:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: appDB
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  phpmyadmin:
+    image: phpmyadmin
+    links:
+      - database
+    ports:
+      - 8000:80
+
+  frontend:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    links:
+      - database
+    volumes:
+      - ./php/src:/var/www/html
+    ports:
+      - 8081:80
