@@ -9,25 +9,21 @@
     <ul>
         <li><a href="index.php">Главная</a></li>
     </ul>
-    <p><b>Список файлов</b></p>
+    <p>ls</p>
     <?php
     echo system("ls");
     ?>
-    <br><br>
-    <p><b>Информация о процессах</b></p>
+    <p>ps</p>
     <?php
     echo system("ps");
     ?>
-    <br><br>
-    <p><b>Пользователь</b></p>
+    <p>whoami</p>
     <?php
     echo system("whoami");
     ?>
-    <br><br>
-    <p><b>Идентификатор</b></p>
+    <p>id</p>
     <?php
     echo system("id");
     ?>
-    <br><br>
 </body>
 </html>
