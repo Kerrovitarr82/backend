@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+
+  database:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+  back:
+    build: apache/
+    container_name: back
+    volumes:
+      - ./src:/var/www/html
+      - ./conf/apache2/sites-available:/etc/apache2/sites-available
+    ports:
+      - "8080:80"
+    depends_on:
+      - database
+  front:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./conf/nginx/default.conf:/etc/nginx/default.conf
+      - ./src:/usr/share/nginx/html
+    depends_on:
+      - database
+      - back
+volumes:
+  dbdata:
