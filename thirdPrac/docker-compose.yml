@@ -6,20 +6,19 @@ services:
     image: mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: appDB2
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+      - db_volume:/var/lib/mysql
     ports:
       - "3306:3306"
-    volumes:
-      - dbdata:/var/lib/mysql
-      - ./sql:/docker-entrypoint-initdb.d
   back:
-    build: apache/
-    container_name: back
+    build: ./apache
     volumes:
-      - ./src:/var/www/html
-      - ./conf/apache2/sites-available:/etc/apache2/sites-available
-    ports:
-      - "8080:80"
+      - ./src/check.php:/var/www/pr/check.php
+      - ./src/private:/var/www/pr/private
+      - ./conf/apache2/000-default.conf:/etc/apache2/sites-available/000-default.conf
     depends_on:
       - database
   front:
@@ -27,10 +26,9 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./conf/nginx/default.conf:/etc/nginx/default.conf
-      - ./src:/usr/share/nginx/html
+      - ./conf/nginx/:/etc/nginx/conf.d
+      - ./src/index.html:/usr/share/nginx/index.html
     depends_on:
-      - database
       - back
 volumes:
-  dbdata:
+  db_volume:
