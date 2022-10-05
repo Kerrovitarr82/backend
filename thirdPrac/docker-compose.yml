@@ -3,6 +3,7 @@ version: "3"
 services:
 
   database:
+    container_name: my_database
     image: mysql
     restart: always
     environment:
@@ -14,21 +15,23 @@ services:
     ports:
       - "3306:3306"
   back:
+    container_name: my_back
     build: ./apache
     volumes:
       - ./src/check.php:/var/www/pr/check.php
       - ./src/private:/var/www/pr/private
       - ./conf/apache2/000-default.conf:/etc/apache2/sites-available/000-default.conf
-    depends_on:
+    links:
       - database
   front:
+    container_name: my_front
     image: nginx
     ports:
       - "80:80"
     volumes:
       - ./conf/nginx/:/etc/nginx/conf.d
-      - ./src/index.html:/usr/share/nginx/index.html
-    depends_on:
+      - ./src/public/:/usr/share/nginx/
+    links:
       - back
 volumes:
   db_volume:
