@@ -27,10 +27,8 @@ if (
 
         echo json_encode(array("message" => "Планета была создана."), JSON_UNESCAPED_UNICODE);
     } else {
-        // установим код ответа - 503 сервис недоступен
         http_response_code(503);
 
-        // сообщим пользователю
         echo json_encode(array("message" => "Невозможно создать планету."), JSON_UNESCAPED_UNICODE);
     }
 } else {
