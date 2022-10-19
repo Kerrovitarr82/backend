@@ -54,16 +54,21 @@ class Planet
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $this->name = $row["name"];
-        $this->description = $row["description"];
+        $this->name = $row["name"] ?? null;
+        $this->description = $row["description"] ?? null;
     }
 
     function update()
     {
-
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $sql = "SELECT name, description FROM " . $this->table_name . " WHERE id = " . $this->id;
+        die(print_r($this->conn->query($sql)));
+        if ($this->conn->query($sql)) {
+            return false;
+        }
         $this->name = htmlspecialchars(strip_tags($this->name));
         $this->description = htmlspecialchars(strip_tags($this->description));
-        $this->id = htmlspecialchars(strip_tags($this->id));
+
 
         if (!empty($this->name) && !empty($this->description)) {
             $query = "UPDATE " . $this->table_name . " SET name = :name, description = :description WHERE id = :id";
@@ -90,11 +95,15 @@ class Planet
 
     function delete()
     {
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $sql = "SELECT name, description FROM " . $this->table_name . " WHERE id = " . $this->id;
+        if (!empty($this->conn->query($sql))) {
+            return false;
+        }
+
         $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
 
         $stmt = $this->conn->prepare($query);
-
-        $this->id = htmlspecialchars(strip_tags($this->id));
 
         $stmt->bindParam(1, $this->id);
 
