@@ -62,8 +62,7 @@ class Planet
     {
         $this->id = htmlspecialchars(strip_tags($this->id));
         $sql = "SELECT name, description FROM " . $this->table_name . " WHERE id = " . $this->id;
-        die(print_r($this->conn->query($sql)));
-        if ($this->conn->query($sql)) {
+        if (empty($this->conn->query($sql)->fetch(PDO::FETCH_ASSOC))) {
             return false;
         }
         $this->name = htmlspecialchars(strip_tags($this->name));
@@ -97,7 +96,7 @@ class Planet
     {
         $this->id = htmlspecialchars(strip_tags($this->id));
         $sql = "SELECT name, description FROM " . $this->table_name . " WHERE id = " . $this->id;
-        if (!empty($this->conn->query($sql))) {
+        if (empty($this->conn->query($sql)->fetch(PDO::FETCH_ASSOC))) {
             return false;
         }
 
