@@ -1,7 +1,14 @@
 <?php
 session_start();
 if (isset($_COOKIE['user'])) {
-    header("Location: private/home.php");
+    setcookie('user', $_COOKIE['user'], time() + (10 * 365 * 24 * 60 * 60));
+    if (isset($_COOKIE['lastScreen']) and $_COOKIE['lastScreen'] === 'home') {
+        header("Location: private/home.php");
+    } else if (isset($_COOKIE['lastScreen']) and $_COOKIE['lastScreen'] === 'filePage') {
+        header("Location: private/filePage.php");
+    } else {
+        header("Location: private/home.php");
+    }
 } else {
     header("Location: auth.html");
 }

@@ -1,3 +1,8 @@
+<?php
+session_start();
+setcookie('lastScreen', 'filePage', time() + (10 * 365 * 24 * 60 * 60), '/');
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>

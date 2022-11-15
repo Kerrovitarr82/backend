@@ -1,3 +1,8 @@
+<?php
+session_start();
+setcookie('lastScreen', 'home', time() + (10 * 365 * 24 * 60 * 60), '/');
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -38,13 +43,11 @@
         <li><a href="home.php#uranus">Уран</a></li>
         <li><a href="home.php#neptun">Нептун</a></li>
         <li><a href="home.php#sun">Солнце</a></li>
-        <li><a href="filePage.php">Вставка файла</a></li>
+        <li><a href="filePage.php?uname=<?php echo $_POST['uname'] ?>">Вставка файла</a></li>
     </ul>
 </header>
 <main class="mainContent">
     <?php
-    session_start();
-    setcookie('user', $_POST['uname'], time() + (10 * 365 * 24 * 60 * 60));
     $celestial_body = file_get_contents("texts/earth.txt", true);
     echo $celestial_body;
     $celestial_body = file_get_contents("texts/mercury.txt", true);

@@ -6,7 +6,7 @@ if ($result->num_rows != 0) {
         if ($row['passwd'] == '{SHA}' . base64_encode(sha1($_POST['psw'], TRUE))) {
             session_start();
             setcookie('user', $_POST['uname'], time() + (10 * 365 * 24 * 60 * 60));
-            header("Location: private/home.php");
+            header("Location: private/home.php?uname=" . $_POST['uname']);
             exit();
         }
     }
