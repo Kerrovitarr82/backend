@@ -43,6 +43,8 @@
 </header>
 <main class="mainContent">
     <?php
+    session_start();
+    setcookie('user', $_POST['uname'], time() + (10 * 365 * 24 * 60 * 60));
     $celestial_body = file_get_contents("texts/earth.txt", true);
     echo $celestial_body;
     $celestial_body = file_get_contents("texts/mercury.txt", true);
