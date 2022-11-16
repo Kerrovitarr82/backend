@@ -1,5 +1,11 @@
 <?php
 session_start();
+if (isset($_COOKIE['user'])) {
+    setcookie('user', $_COOKIE['user'], time() + (10 * 365 * 24 * 60 * 60));
+} else {
+    header("Location: auth.html");
+    exit();
+}
 setcookie('lastScreen', 'filePage', time() + (10 * 365 * 24 * 60 * 60), '/');
 ?>
 
