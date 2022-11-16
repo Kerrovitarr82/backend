@@ -1,9 +1,9 @@
 <?php
 session_start();
 if (isset($_COOKIE['user'])) {
-    setcookie('user', $_COOKIE['user'], time() + (10 * 365 * 24 * 60 * 60));
+    setcookie('user', $_COOKIE['user'], time() + (10 * 365 * 24 * 60 * 60), '/');
 } else {
-    header("Location: auth.html");
+    header("Location: ../auth.html");
     exit();
 }
 setcookie('lastScreen', 'home', time() + (10 * 365 * 24 * 60 * 60), '/');
