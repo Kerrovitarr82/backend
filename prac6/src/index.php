@@ -8,6 +8,8 @@ if (isset($_COOKIE['user'])) {
         header("Location: private/home.php");
     } else if (isset($_COOKIE['lastScreen']) and $_COOKIE['lastScreen'] === 'filePage') {
         header("Location: private/filePage.php");
+    } else if (isset($_COOKIE['lastScreen']) and $_COOKIE['lastScreen'] === 'fixtures') {
+        header("Location: private/fixtures.php");
     } else {
         header("Location: private/home.php");
     }

@@ -13,7 +13,7 @@ if (isset($_COOKIE['user'])) {
     header("Location: ../auth.html");
     exit();
 }
-setcookie('lastScreen', 'filePage', time() + (10 * 365 * 24 * 60 * 60), '/');
+setcookie('lastScreen', 'fixtures', time() + (10 * 365 * 24 * 60 * 60), '/');
 echo '<p><a href="home.php">Главная</a></p>';
 
 $faker = Faker\Factory::create();
