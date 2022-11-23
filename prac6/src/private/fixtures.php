@@ -46,7 +46,7 @@ while ($row = $stmt->fetch()) {
     echo "id: " . $row["id"] . " - Name: " . $row["name"] .
         " - Distance from star: " . $row["distance_from_star"] .
         " - Mass: " . $row["mass"] .
-        " - Radius: " . $row["distance_from_star"] . "<br>";
+        " - Radius: " . $row["radius"] . "<br>";
 }
 
 $graph = new Graph(900, 300);
@@ -76,8 +76,8 @@ $graph = new Graph(700, 800);
 $graph->SetScale("linlin");
 $graph->img->SetMargin(40, 40, 40, 40);
 $graph->SetShadow();
-$graph->title->Set('Distance');
-$sp1 = new ScatterPlot(array_count_values($distanceArr));
+$graph->title->Set('Radius');
+$sp1 = new ScatterPlot(array_count_values($radiusArr));
 $graph->Add($sp1);
 $graph->Stroke('charts/scatter.png');
 
