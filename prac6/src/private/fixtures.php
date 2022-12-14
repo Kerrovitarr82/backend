@@ -90,7 +90,7 @@ echo '<img src="charts/pie.png"><br>';
 echo '<img src="charts/scatter.png"><br>';
 
 
-function water($path)
+function water($path): void
 {
     $stamp = imagecreatefrompng('watermark/mark.png');
     $im = imagecreatefrompng($path);
